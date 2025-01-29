@@ -1,0 +1,36 @@
+          
+        <bot>
+    <name>MartingaleBot</name>
+    <description>Martingale strategy with risk management</description>
+    
+    <settings>
+        <tradeAmount>1</tradeAmount> <!-- Initial stake -->
+        <maxLosses>5</maxLosses> <!-- Max losses before stop -->
+        <takeProfit>1.5</takeProfit> <!-- Target profit per round -->
+        <secondsPerTrade>5</secondsPerTrade> <!-- Time interval between trades -->
+        <contractType>CALLPUT</contractType> <!-- Type of trade (Call/Put) -->
+    </settings>
+    
+    <tradingLogic>
+        <!-- Martingale Strategy Logic -->
+        <ifCondition>
+            <or>
+                <if condition="isLoss">
+                    <then>
+                        <betAction>
+                            <!-- Double stake on loss -->
+                            <newStake>double</newStake>
+                        </betAction>
+                    </then>
+                </ifCondition>
+            </or>
+        </ifCondition>
+        
+        <onWin>
+            <resetStake>
+                <!-- Reset stake to initial after win -->
+                <newStake>1</newStake>
+            </resetStake>
+        </onWin>
+    </tradingLogic>
+</bot>
